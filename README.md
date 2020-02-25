@@ -17,8 +17,11 @@ chmod -R 777 ./
     #4.5 - docker pull composer
     
 #5 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan key:generate
+
 #6 - docker-compose exec laraveldeveloper nano .env (optional)
+
 #7 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan config:cache
+
 # -- https://medium.com/@cvallejo/roles-usuarios-laravel-2e1c6123ad
     #7.1 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:auth 
 
