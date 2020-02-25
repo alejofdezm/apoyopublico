@@ -159,6 +159,9 @@ use App\Role;
  
     #7.8 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Categoriaproductos -m
     
+       $table->string('nombre');
+       $table->string('descripcion')->nullable();;
+            
     use App\Categoriaproductos;
     
      protected $primaryKey = 'id';
