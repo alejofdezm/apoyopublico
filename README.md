@@ -200,7 +200,7 @@ use App\Role;
     
      $this->call(CategoriasproductoTableSeeder::class)
      
-     
+     docker exec -it servidorweb php artisan migrate:refresh --seed
      
     #7.9 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Producto -m
     
