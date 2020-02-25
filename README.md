@@ -2,6 +2,8 @@
 
 #--1 - docker run --rm -it  -v $(pwd):/app composer composer install 
 
+chmod -R 777 ./
+
 #--2 - docker exec -it servidorweb  bash
 
  #---2.1 - sudo chown -R $USER:$USER ./
