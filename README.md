@@ -160,14 +160,21 @@ use App\Role;
     #7.8 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Categoriaproductos -m
     
        $table->string('nombre');
-       $table->string('descripcion')->nullable();;
-            
+       $table->string('descripcion')->nullable();
+           docker exec -it servidorweb php artisan migrate --force   
     use App\Categoriaproductos;
     
      protected $primaryKey = 'id';
 
     protected $table = 'categoriaproductos';
     protected $fillable = ['nombre', 'descripcion'];
+    
+    #7.8.0.1 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model productos -m
+    
+      $table->integer('idcategoriaproductos');
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->decimal('precio', 8, 2); 
     
     #7.8.1 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder CategoriasproductoTableSeeder
     
