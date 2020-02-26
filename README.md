@@ -98,7 +98,7 @@
 
         docker exec -it servidorweb php artisan migrate --force
         
-#-- modifican el archivo: app/database/seeds/DatabaseSeeder.php e incorporan en la funcion run:
+#-- modifican el archivo: app/database/seeds/DatabaseSeeder.php e incorporan en la funcion run "esto nos creara automaticamente dos usuarios en base de datos, pueden incluir mas si gustan":
 
         $user = new User();
         $user->name = 'Admin';
@@ -115,53 +115,13 @@
          ademas hay que indicar que se require usar el modelo de usuario en la clase DatabaseSeeder, por medio del use en la parte superior del archivo despues de <?php :
                 
                 use App\User;
-                
-
-#-- paso opcional (3% extras de la nota, a quien logre ejecutar la siguiente guia y hacer que los roles entren a funcionar, 2% extras quien lo explique a la clase de forma formal, antes de que lo explique el profesor "reto")
+             
+             
+#-- migramos los datos del seeder (punto anterior):
         
-        seguir guia: https://medium.com/@cvallejo/roles-usuarios-laravel-2e1c6123ad
-        
-        comandos de la guia adaptados a docker:
-        
-        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Role -m
-        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:migration create_role_user_table
-        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder RoleTableSeeder
-        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder UsersTableSeeder
-        
-##ignorar este codigo
-        #--2 - docker exec -it servidorweb  bash
-        #---2.1 - sudo chown -R $USER:$USER ./
-        #---2.5 - sudo chown -R www-data:www-data ./
-        #---4 - docker ps   
-        #6 - docker-compose exec laraveldeveloper nano .env (optional)
-
-
-    
-    
-     
-    #7.5 - 
-    
-    app/database/seeds/UsersTableSeeder.php
-    public function run()
-    {
-        $role_admin = Role::where('name', 'admin')->first();
-        $role_user = Role::where('name', 'user')->first();
-
-        
-        $user->roles()->attach($role_admin);
-        //
-
-        
-        $user1->roles()->attach($role_user);
-    }
-     app/database/seeds/DatabaseSeeder.php
-    
-     $this->call(UsersTableSeeder::class)
-     #7.7 - docker exec -it servidorweb php artisan migrate:refresh --seed
-
-
- 
- 
+           docker exec -it servidorweb php artisan migrate:refresh --seed
+          
+#-- 
     #7.8 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Categoriaproductos -m
     
        $table->string('nombre');
@@ -297,10 +257,32 @@ Route::get('/categorias/agregar', 'CategoriasController@agregar')->name('agregar
     
     
     https://github.com/alejofdezm/ucatolica/blob/master/editar.blade.php
-    
-    # -- https://laravel.com/docs/5.8/migrations
+ 
+ 
+ #-- paso opcional (3% extras de la nota, a quien logre ejecutar la siguiente guia y hacer que los roles entren a funcionar, 2% extras quien lo explique a la clase de forma formal, antes de que lo explique el profesor "reto")
+        
+        seguir guia: https://medium.com/@cvallejo/roles-usuarios-laravel-2e1c6123ad
+        
+        comandos de la guia adaptados a docker:
+        
+        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Role -m
+        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:migration create_role_user_table
+        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder RoleTableSeeder
+        #- docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder UsersTableSeeder
+        
+        
+
+# -- https://laravel.com/docs/5.8/migrations
     # -- FontAwesome
     # -- docker exec -it servidorweb
     # -- docker exec -it servidorweb npm install @fortawesome/fontawesome-free --save
 # docker-compose exec db bash
 
+
+## ignorar este codigo
+        
+        #--2 - docker exec -it servidorweb  bash
+        #---2.1 - sudo chown -R $USER:$USER ./
+        #---2.5 - sudo chown -R www-data:www-data ./
+        #---4 - docker ps   
+        #6 - docker-compose exec laraveldeveloper nano .env (optional)
