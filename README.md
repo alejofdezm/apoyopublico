@@ -1,8 +1,52 @@
 # ucatolica
+# Montamos el ambiente de desarrollo(optional en caso de montar el ambiente docker desde cero)
 
-#--1 - docker run --rm -it  -v $(pwd):/app composer composer install 
+#---nos apoyamos del framework laravel 5.8 para conocer sobre POO, MVC y del mundo de desarrollo web 
 
-chmod -R 777 ./
+        https://laravel.com/docs/5.8/installation
+
+#--descargar laravel 5.8 desde aqui:
+
+#--descomprimir laravel 5.8, cambiar nombre y poner el que gusten, "ejemplo claseu".
+
+#--descargar del siguiente link archivos a descomprimir: https://github.com/alejofdezm/ucatolica/raw/master/descomprimir.zip
+
+#--descomprimir el archivo con nombre descomprimir.zip dentro de la carperta de laravel anterior "ejemplo: claseu".
+
+#--Siempre que se quieran volver super usuario, deben de ejecutar: sudo su y luego su contraseña.
+
+#--en caso de montar el ambiente desde cero, compilar el servidor web de docker con el siguiente comando: 
+
+        docker build -t laraveldeveloper ./  
+        
+        (paso opcional, solo si es nuevo el ambiente, en las maquinas virtual entregadas no hay que hacer esto, solo si quieren montar su propia maquina virtual o local)
+
+
+## --visto en clases(levantar su ambiente en clase)
+
+#-- abrimos visual studio code (editor que usaremos en clases)
+#-- abrimos la carpeta con visual code donde descomprimimos laravel "ejemplo claseu" y donde alojamos los archivos que vienen comprimidas en el archivo descomprimir.zip 
+
+#-- luego abrimos la terminal
+#-- se vuelven super usuario: sudo su
+
+#-- levantan el ambiente de desarrollo con el siguiente comando:
+
+     docker-compose up -d
+ 
+ #- el comando anterior nos lenvata lo siguiente:
+  servidor web en el puerto 80, ruta de consulta: http://127.0.0.1/
+  servidor de mysql con nombre: db
+  servidor de administración de sus ambientes (portainer): http://127.0.0.1:9000
+  servidor para administrar mysql por medio de phpmyadmin: http://127.0.0.1:8081/
+  
+#instalamos las dependencias que necesita laravel para poder funcionar de forma basica:
+
+     docker run --rm -it  -v $(pwd):/app composer composer install 
+
+#-- luego de cada comando ejecutado que agregue nuevos archivos, es bueno dar permisos de lectura y escritura a toda la carpeta (el comando anterior agrego nuevos archivos que son las dependecias basicas):
+     
+     chmod -R 777 ./
 
 #--2 - docker exec -it servidorweb  bash
 
@@ -10,7 +54,7 @@ chmod -R 777 ./
  
  #---2.5 - sudo chown -R www-data:www-data ./
  
-#--3 - docker-compose up -d
+ 
 
 #---4 - docker ps
 
