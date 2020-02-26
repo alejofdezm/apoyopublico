@@ -121,25 +121,73 @@
         
            docker exec -it servidorweb php artisan migrate:refresh --seed
           
-#-- 
-    #7.8 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Categoriaproductos -m
-    
-       $table->string('nombre');
-       $table->string('descripcion')->nullable();
-           docker exec -it servidorweb php artisan migrate --force   
-    use App\Categoriaproductos;
-    
-     protected $primaryKey = 'id';
+#-- vamos a crear dos tablas, para almacenar categoria de productos y productos
 
-    protected $table = 'categoriaproductos';
-    protected $fillable = ['nombre', 'descripcion'];
+        Categoriaproductos 
+                -- id
+                -- nombre
+                -- descripcion
+                
+        Productos 
+                -- id
+                -- idcategoriaproductos
+                -- nombre
+                -- descripcion
+#- creamos el modelo y archivo de migración de tabla Categoriaproductos
+
+        docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Categoriaproductos -m
+        
+        Nos genera dos archivo, 
+        
+        1- en la carpeta App, nombre de la clase (modelo): Categoriaproductos
+        
+        Añadimos los nombres de las columnas de la tabla de base de datos y nombre de la tabla e indicamos cual es la columna inidice (investigar que es una columna indice en una tabla de base de datos):
+                Añadir siguientes lineas al modelo Categoriaproductos:
+                
+                        protected $primaryKey = 'id'; 
+                        protected $table = 'categoriaproductos';
+                        protected $fillable = ['nombre', 'descripcion'];
+        
+        2- en la carpeta database / migrations / se genera un archivo con nombre que finaliza con: ---- _create_categoriaproductos_table.php
     
-    #7.8.0.1 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model productos -m
+        Añadimos:
+            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->string('descripcion')->nullable();;
+            $table->timestamps();
+
+#- creamos el modelo y archivo de migración de tabla Productos
+
+        docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Productos -m
+        
+        Nos genera nuevamente dos archivo, 
+        
+        1- en la carpeta App, nombre de la clase (modelo): Producto
+        
+        Añadimos los nombres de las columnas de la tabla de base de datos y nombre de la tabla e indicamos cual es la columna inidice (investigar que es una columna indice en una tabla de base de datos):
+                Añadir siguientes lineas al modelo producto:
+                
+                        protected $primaryKey = 'id'; 
+                        protected $table = 'productos'; 
+        
+        2- en la carpeta database / migrations / se genera un archivo con nombre que finaliza con: ---- _create_productos_table.php
     
-      $table->integer('idcategoriaproductos');
+        Añadimos:
+            $table->bigIncrements('id');
+            $table->integer('idcategoriaproductos');
             $table->string('nombre');
             $table->string('descripcion');
             $table->decimal('precio', 8, 2); 
+            $table->timestamps(); 
+
+
+#migramos las nuevas tablas:
+
+        docker exec -it servidorweb php artisan migrate --force   
+    
+##  --    
+    
+    use App\Categoriaproductos;
     
     #7.8.1 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder CategoriasproductoTableSeeder
     
