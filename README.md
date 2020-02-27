@@ -231,7 +231,7 @@
      
 #  Vamos a crear una ruta, para mostrar los datos de categorias. 
 
-#4. modificamos el archivo que se encuentra en: routes, llamado web.php
+#4. modificamos el archivo que se encuentra en: routes / , llamado web.php
 
         Objetivo: permitir que cuando el usuario escriba la ruta de nuestro sitio, ejemplo: miu.com, pueda ver las categorias si ingresa a la siguiente ruta: http(s)://miu.com/categorias/lista, en nuestro caso: http:/127.0.0.1/categorias/lista
 
@@ -244,8 +244,29 @@
        Nota: 1- recuerden que acción y funcion es lo mismo, pero en este caso para los controller las llamaremos acciones.
              2- en los controladores vamos agregar lo que se llama, logica de negocio.
     
-
-
+#4.1 creamos nuestra nueva acción en el controller Home para poder listar todas las categorias
+        
+        1- agregan luego de la creacion del namespace: 
+                        use App\Categoriaproductos;
+                  con el fin de poder hacer uso del modelo que hace referencia a nuestra tabla de base de datos.
+        2- dentro de la implementación de la clase homecontroller, agregamos un metodo más que llame segun lo definieron en el Router, en nuestro caso de ejemplo: listarcategorias y hacemos uso de dd, para mostrar los datos que estan almacenado en base de datos.
+        
+        de esta forma, rotorna todas las categorias:
+        
+         public function listarcategorias()
+            {
+                dd(Categoriaproductos::get());
+            }
+        
+        de esta otra forma, retorna solo la categoria del id que se le pase (en este caso de ejemplo, solo la categoria con id=3):
+        
+        public function listarcategorias()
+            {
+                dd(Categoriaproductos::where('id', 3 )->get());
+            }
+            
+            
+            
 ##modificamos las rutas y separamos en admin y usuario normal
 
 Route::group(['prefix' => 'administracion'], function() {
