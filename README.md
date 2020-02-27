@@ -1,25 +1,25 @@
 # ucatolica
 # Montamos el ambiente de desarrollo(optional en caso de montar el ambiente docker desde cero)
 
-#---nos apoyamos del framework laravel 5.8 para conocer sobre POO, MVC y del mundo de desarrollo web 
+#1---nos apoyamos del framework laravel 5.8 para conocer sobre POO, MVC y del mundo de desarrollo web 
 
         https://laravel.com/docs/5.8/installation
 
-#--descargar laravel 5.8 desde aqui: https://github.com/laravel/laravel/archive/5.8.zip
+#1.1--descargar laravel 5.8 desde aqui: https://github.com/laravel/laravel/archive/5.8.zip
 
 
 (https://github.com/laravel/laravel/tree/5.8)
 
 
-#--descomprimir laravel 5.8, cambiar nombre y poner el que gusten, "ejemplo claseu".
+#1.2--descomprimir laravel 5.8, cambiar nombre y poner el que gusten, "ejemplo claseu".
 
-#--descargar del siguiente link archivos a descomprimir: https://github.com/alejofdezm/ucatolica/raw/master/descomprimir.zip
+#1.3--descargar del siguiente link el archivos a descomprimir: https://github.com/alejofdezm/ucatolica/raw/master/descomprimir.zip
 
-#--descomprimir el archivo con nombre descomprimir.zip dentro de la carperta de laravel anterior "ejemplo: claseu".
+#1.4--descomprimir el archivo con nombre descomprimir.zip dentro de la carperta de laravel anterior "ejemplo: claseu".
 
-#--Siempre que se quieran volver super usuario, deben de ejecutar: sudo su y luego su contraseña.
+#1.5--Siempre que se quieran volver super usuario, deben de ejecutar: sudo su y luego su contraseña.
 
-#--en caso de montar el ambiente desde cero, compilar el servidor web de docker con el siguiente comando: 
+#1.6--en caso de montar el ambiente desde cero, compilar el servidor web de docker con el siguiente comando: 
 
         docker build -t laraveldeveloper ./  
         
@@ -29,19 +29,19 @@
 
 ## --visto en clases(levantar su ambiente en clase)
 
-#-- abrimos visual studio code (editor que usaremos en clases)
+#2.-- abrimos visual studio code (editor que usaremos en clases)
 
-#-- abrimos la carpeta con visual code donde descomprimimos laravel "ejemplo claseu" y donde alojamos los archivos que vienen comprimidas en el archivo descomprimir.zip 
+#2.1-- abrimos la carpeta con visual code donde descomprimimos laravel "ejemplo claseu" y donde alojamos los archivos que vienen comprimidas en el archivo descomprimir.zip 
 
-#-- luego abrimos la terminal
+#2.2-- luego abrimos la terminal
 
-#-- se vuelven super usuario: sudo su
+#2.3-- se vuelven super usuario: sudo su
 
-#-- levantan el ambiente de desarrollo con el siguiente comando:
+#2.4-- levantan el ambiente de desarrollo con el siguiente comando:
 
      docker-compose up -d
  
- #- el comando anterior nos lenvata lo siguiente:
+ #2.4.1- el comando anterior nos lenvata lo siguiente:
  
         #- servidor web en el puerto 80, ruta de consulta: http://127.0.0.1/
   
@@ -61,15 +61,15 @@
                -- usuario: admincorreo
                -- contraseña: Admin123*
   
-#instalamos las dependencias que necesita laravel para poder funcionar de forma basica:
+#2.5instalamos las dependencias que necesita laravel para poder funcionar de forma basica:
 
      docker run --rm -it  -v $(pwd):/app composer composer install 
 
-#-- luego de cada comando ejecutado que agregue nuevos archivos, es bueno dar permisos de lectura y escritura a toda la carpeta (el comando anterior agrego nuevos archivos que son las dependecias básicas):
+#000-- luego de cada comando ejecutado que agregue nuevos archivos, es bueno dar permisos de lectura y escritura a toda la carpeta (el comando anterior agrego nuevos archivos que son las dependecias básicas):
      
      chmod -R 777 ./
      
-#-- ingresar a la carpeta del proyecto y renombrar el archivo con nombre: *.env.example* por *.env* "remover example"
+#2.6-- ingresar a la carpeta del proyecto y renombrar el archivo con nombre: *.env.example* por *.env* "remover example"
      
      remplazamos los siguientes datos del nuevo archivo .env:
      
@@ -80,25 +80,25 @@
         DB_USERNAME=root
         DB_PASSWORD=M4r1adb001.
 
-#-- generamos el key de cache, con el siguiente comando:
+#2.6.1-- generamos el key de cache, con el siguiente comando:
 
         docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan key:generate
 
         esto modifica en el archivo .env la variable: APP_KEY= 
 
-#-- incorporar los archivos de configuracion en el cache, para obtener una lectura rapida:
+#2.6.2-- incorporar los archivos de configuracion en el cache, para obtener una lectura rapida:
         
          docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan config:cache
 
-#-- activamos la autenticación de laravel de caja:
+#2.7-- activamos la autenticación de laravel de caja:
         
         docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:auth
 
-#-- migramos las tablas de autenticación, crea 3 tablas:
+#2.7.1-- migramos las tablas de autenticación, crea 3 tablas:
 
         docker exec -it servidorweb php artisan migrate --force
         
-#-- modifican el archivo: app/database/seeds/DatabaseSeeder.php e incorporan en la funcion run "esto nos creara automaticamente dos usuarios en base de datos, pueden incluir mas si gustan":
+#2.7.2-- modifican el archivo: app/database/seeds/DatabaseSeeder.php e incorporan en la funcion run "esto nos creara automaticamente dos usuarios en base de datos, pueden incluir mas si gustan":
 
         $user = new User();
         $user->name = 'Admin';
@@ -117,11 +117,11 @@
                 use App\User;
              
              
-#-- migramos los datos del seeder (punto anterior):
+#2.7.3-- migramos los datos del seeder (punto anterior):
         
            docker exec -it servidorweb php artisan migrate:refresh --seed
           
-#-- vamos a crear dos tablas, para almacenar categoria de productos y productos
+#2.8-- vamos a crear dos tablas, para almacenar categoria de productos y productos
 
         Categoriaproductos 
                 -- id
@@ -133,7 +133,7 @@
                 -- idcategoriaproductos
                 -- nombre
                 -- descripcion
-#- creamos el modelo y archivo de migración de tabla Categoriaproductos
+#2.8.1.1- creamos el modelo y archivo de migración de tabla Categoriaproductos
 
         docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Categoriaproductos -m
         
@@ -156,7 +156,7 @@
             $table->string('descripcion')->nullable();;
             $table->timestamps();
 
-#- creamos el modelo y archivo de migración de tabla Productos
+#2.8.1.2- creamos el modelo y archivo de migración de tabla Productos
 
         docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Productos -m
         
@@ -181,7 +181,7 @@
             $table->timestamps(); 
 
 
-#migramos las nuevas tablas:
+#2.8.2migramos las nuevas tablas:
 
         docker exec -it servidorweb php artisan migrate --force   
     
