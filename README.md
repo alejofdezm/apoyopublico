@@ -229,20 +229,34 @@
      
      docker exec -it servidorweb php artisan migrate:refresh --seed
      
-#4.  
-    
-    
+#  Vamos a crear una ruta, para mostrar los datos de categorias. 
 
+#4. modificamos el archivo que se encuentra en: routes, llamado web.php
+
+        Objetivo: permitir que cuando el usuario escriba la ruta de nuestro sitio, ejemplo: miu.com, pueda ver las categorias si ingresa a la siguiente ruta: http(s)://miu.com/categorias/lista, en nuestro caso: http:/127.0.0.1/categorias/lista
+
+       Para ello vamos a ir al archivo y agregar la siguiente linea: 
+       
+       Route::get('/categorias/lista', 'HomeController@listarcategorias')->name('listarcategorias');
+       
+       Nota: esta linea lo que indica es, que cuando el usuario escriba esa ruta, sera digido al controllador que se llama HomeController a la acción (funcion) llamada listarcategorias
+       
+       Nota: 1- recuerden que acción y funcion es lo mismo, pero en este caso para los controller las llamaremos acciones.
+             2- en los controladores vamos agregar lo que se llama, logica de negocio.
+    
 
 
 ##modificamos las rutas y separamos en admin y usuario normal
+
 Route::group(['prefix' => 'administracion'], function() {
     require (__DIR__ . '/rutasdeadministradores.php');
 });
 
+
 Route::group(['prefix' => 'usuarios'], function() {
     require (__DIR__ . '/rutasdeusuarios.php');
 });
+
 
 ##---creamos los archivos
 rutasdeadministradores
