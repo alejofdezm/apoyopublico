@@ -185,11 +185,21 @@
 
         docker exec -it servidorweb php artisan migrate --force   
     
-##  --    
+#3. Vamos a cargar nuestras dos tablas con datos de ejemplo, para ello primero vamos a correr este comando:  
+
+        docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder CategoriasproductoTableSeeder
+        
+        Esto nos generara un archivo en database / seeds, de mombre: CategoriasproductoTableSeeder
+        
+#3.1 ingresar al archivo generado con el comando anterior y indicar que van hacer uso de los dos modelos que representan sus tablas creadas anteriormente:
+    
+    <?php
     
     use App\Categoriaproductos;
+    use App\Productos;
+ 
+#3.2 luego en el metodo run(), debemos de indicar que ejecute el siguiente codigo:
     
-    #7.8.1 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:seeder CategoriasproductoTableSeeder
     
      for($i = 0; $i < 10; $i++)
         {
@@ -209,15 +219,20 @@
             }
         } 
     
-    app/database/seeds/DatabaseSeeder.php
+    Nota: este codigo lo que hace es ingresar 10 categorias y por cada categoria agregara 20 productos.
     
-     $this->call(CategoriasproductoTableSeeder::class)
+#3.2.1 luego en la ruta:  database / seeds en el archivo DatabaseSeeder.php, al final del metodo run, agregamos la siguiente linea, que invoca al codigo anterior:
+    
+     $this->call(CategoriasproductoTableSeeder::class);
+     
+#3.2.2 por ultimo, hacemos la migración de los datos, ejecutando nuevamente el comando:
      
      docker exec -it servidorweb php artisan migrate:refresh --seed
      
-    #7.9 - docker run --rm -it  -v $(pwd):/app laraveldeveloper php artisan make:model Producto -m
+#4.  
     
-# -docker run --rm -it  -v $(pwd):/app laraveldeveloper php composer.phar --verbose install
+    
+
 
 
 ##modificamos las rutas y separamos en admin y usuario normal
@@ -328,7 +343,7 @@ Route::get('/categorias/agregar', 'CategoriasController@agregar')->name('agregar
 
 
 ## ignorar este codigo
-        
+        # -docker run --rm -it  -v $(pwd):/app laraveldeveloper php composer.phar --verbose install
         #--2 - docker exec -it servidorweb  bash
         #---2.1 - sudo chown -R $USER:$USER ./
         #---2.5 - sudo chown -R www-data:www-data ./
