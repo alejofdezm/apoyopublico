@@ -98,7 +98,7 @@
 
         docker exec -it servidorweb php artisan migrate --force
         
-#2.7.2-- modifican el archivo: app/database/seeds/DatabaseSeeder.php e incorporan en la funcion run "esto nos creara automaticamente dos usuarios en base de datos, pueden incluir mas si gustan":
+#2.7.2-- modifican el archivo: database/seeds/DatabaseSeeder.php e incorporan en la funcion run "esto nos creara automaticamente dos usuarios en base de datos, pueden incluir mas si gustan":
 
         $user = new User();
         $user->name = 'Admin';
@@ -120,7 +120,12 @@
 #2.7.3-- migramos los datos del seeder (punto anterior):
         
            docker exec -it servidorweb php artisan migrate:refresh --seed
-          
+
+#2.7.4 manejo de Roles
+
+usar siguiente guia: https://medium.com/@cvallejo/roles-usuarios-laravel-2e1c6123ad
+
+
 #2.8-- vamos a crear dos tablas, para almacenar categoria de productos y productos
 
         Categoriaproductos 
