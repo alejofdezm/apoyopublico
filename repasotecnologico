@@ -1,0 +1,51 @@
+
+Sevidores web de los mas usados
+apache
+tomcat
+iis
+
+----
+lenguajes de programación del lado del servidor
+php
+c sharp
+vb.net
+java
+
+----
+patrones de diseño
+MVP (model -view -presenter)
+MVC (model - view - controlles) - larval - Symfony - Yii, etc - Zend - mvc.net - python (django)
+FRM de desarrollo como reactjs, vue.js (componentes como material.ui)
+
+sin patron (desarrollo a capela)
+
+--
+
+lenguajes del lado del cliente (browser)
+
+html 0 html5
+css o css3 (bootstrap, MATERIAL DESIGN, BULMA, METRO 4)
+javascript - emascript (5-6) - class y objetos.
+ muy importante y no mencionado en el video: # jquery
+--
+ORM: Mapeo objeto-relacional
+Entity Framework .net
+hibernate (java)
+Nhibernate c sharp
+Elo
+eloquent
+--
+
+base de datos relacionales
+
+postgresql
+sql server
+mysql
+mariadb
+
+----
+
+base de datos no relacionales NoSQL
+Mongodb
+Cassandra
+Redis
