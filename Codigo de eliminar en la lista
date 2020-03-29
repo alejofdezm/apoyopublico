@@ -1,0 +1,7 @@
+Codigo de eliminar en la lista
+
+{!! Form::model($categoria, ['method' => 'delete', 'route' => ['eliminarcategoria', $categoria  ->id], 'class' =>'form-inline form-delete']) !!}
+                                    {!! Form::hidden('id', $categoria->id) !!}
+                                    {!! Form::submit(trans('Eliminar'), ['class' => 'btn btn-xs btn-danger delete', 'name' => 'delete_modal']) !!}
+{!! Form::close() !!}   
+
