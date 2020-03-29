@@ -1,0 +1,25 @@
+instalamos laravelcollective (https://laravelcollective.com/docs/5.8/html)
+para ello vamos primero al archivo composer.json
+y en require agregamos al final "agregar antes una ,"
+"laravelcollective/html": "^5.4.0"
+luego ejecutamos el comando: composer update
+luego de ello vamos al archivo que se encuentra en la siguiente dirección: config/app.php
+y agregan en provider:
+Collective\Html\HtmlServiceProvider::class,
+y en aliases:
+ 'Form' => Collective\Html\FormFacade::class,
+ 'Html' => Collective\Html\HtmlFacade::class
+ 
+ recuerden:  el composer update dura un tiempo
+ 
+luego agregan en el layout, la dependecia a jquery, como se ve en el video:
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" 
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+            crossorigin="anonymous"></script>
+  
+  Recurden incluir ademas: @yield('script')
+  
+  
+Buscar aqui cdns:
+ https://cdnjs.com/libraries/jquery
